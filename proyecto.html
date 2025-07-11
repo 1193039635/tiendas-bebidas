@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pedidos Tienda de Bebidas</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #fff0f5;
+      padding: 20px;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #b22222;
+    }
+    .producto {
+      margin: 10px 0;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      background-color: #b22222;
+      color: white;
+      border: none;
+      padding: 15px;
+      width: 100%;
+      margin-top: 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #8b0000;
+    }
+    .social {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .social a {
+      color: #3b5998;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Bebidas del Pacífico</h1>
+
+  <form id="pedidoForm">
+    <p><strong>Selecciona tus productos:</strong></p>
+
+    <div class="producto"><label><input type="checkbox" value="Viche curado"> Viche curado</label></div>
+    <div class="producto"><label><input type="checkbox" value="Arrechón"> Arrechón</label></div>
+    <div class="producto"><label><input type="checkbox" value="Cerveza"> Cerveza</label></div>
+    <div class="producto"><label><input type="checkbox" value="Vinete"> Vinete</label></div>
+    <div class="producto"><label><input type="checkbox" value="Crema de viche"> Crema de viche</label></div>
+    <div class="producto"><label><input type="checkbox" value="Coco"> Coco</label></div>
+
+    <input type="text" id="nombreCliente" placeholder="Tu nombre completo">
+
+    <button type="button" onclick="enviarPedido()">Enviar Pedido por WhatsApp</button>
+  </form>
+
+  <div class="social">
+    <p>¿Tienes dudas? Escríbenos también en:</p>
+    <a href="https://www.facebook.com/efraindiazcastillo" target="_blank">Facebook: efraindiaz castillo</a>
+  </div>
+
+  <script>
+    function enviarPedido() {
+      const seleccionados = document.querySelectorAll('input[type="checkbox"]:checked');
+      const nombre = document.getElementById('nombreCliente').value.trim();
+      let productos = [];
+
+      seleccionados.forEach(item => productos.push(item.value));
+
+      if (productos.length === 0 || nombre === "") {
+        alert("Selecciona al menos un producto y escribe tu nombre.");
+        return;
+      }
+
+      const mensaje = Hola, soy ${nombre} y quiero pedir: ${productos.join(', ')};
+      const numero = "573177230271";
+      const url = https://wa.me/${numero}?text=${encodeURIComponent(mensaje)};
+
+      window.open(url, "_blank");
+    }
+  </script>
+
+</body>
+</html>
